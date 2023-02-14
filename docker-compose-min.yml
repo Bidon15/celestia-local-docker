@@ -30,45 +30,45 @@ services:
 
   #----------------#
 
-  leaderboard-backend:
-    image: mojiz/leaderboard-backend:latest
-    container_name: leaderboard-backend
-    build:
-      context: ./leaderboard-backend
-    ports: 
-      - ${LEADERBOARD_REST_API_PORT}:${LEADERBOARD_REST_API_PORT}
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "200k"
-        max-file: "10"
-    networks:
-      - celestialocal
-    volumes:
-      - leaderboard-cache:/app/cache
-    environment:
-      LOG_LEVEL: ${LEADERBOARD_LOG_LEVEL}
-      PROMETHEUS_URL: ${PROMETHEUS_URL}
-      APP_NODE_GRPC: "${CORE_IP}:${CORE_GRPC_PORT}"
-      APP_NODE_GRPC_TLS: ${APP_NODE_GRPC_TLS}
-      APP_TM_RPC: "http://${CORE_IP}:${CORE_RPC_PORT}"
-      API_CALL_RETRY: ${LEADERBOARD_API_CALL_RETRY}
-      API_CALL_TIMEOUT: ${LEADERBOARD_API_CALL_TIMEOUT}
-      PROMETHEUS_SYNC_INTERVAL: ${LEADERBOARD_PROMETHEUS_SYNC_INTERVAL}
-      VALIDATOR_SYNC_INTERVAL: ${LEADERBOARD_VALIDATOR_SYNC_INTERVAL}
-      TENDERMINT_SYNC_INTERVAL: ${LEADERBOARD_TENDERMINT_SYNC_INTERVAL}
-      API_ROWS_PER_PAGE: ${LEADERBOARD_API_ROWS_PER_PAGE}
-      REST_API_ADDRESS: ${LEADERBOARD_REST_API_ADDRESS}
-      IP_INFO_API_KEY: ${LEADERBOARD_IP_INFO_API_KEY}
-      DEMO: ${LEADERBOARD_DEMO}
-      ORIGIN_ALLOWED: ${LEADERBOARD_ORIGIN_ALLOWED}
-    healthcheck:
-      test: curl --fail http://leaderboard-backend:${LEADERBOARD_REST_API_PORT}/ || exit 1
-      interval: 30s
-      retries: 10 # Will try for 5 minutes      
-    restart: always
-    security_opt:
-      - "seccomp:unconfined"
+#  leaderboard-backend:
+#    image: mojiz/leaderboard-backend:latest
+#    container_name: leaderboard-backend
+#    build:
+#      context: ./leaderboard-backend
+#    ports:
+#      - ${LEADERBOARD_REST_API_PORT}:${LEADERBOARD_REST_API_PORT}
+#    logging:
+#      driver: "json-file"
+#      options:
+#        max-size: "200k"
+#        max-file: "10"
+#    networks:
+#      - celestialocal
+#    volumes:
+#      - leaderboard-cache:/app/cache
+#    environment:
+#      LOG_LEVEL: ${LEADERBOARD_LOG_LEVEL}
+#      PROMETHEUS_URL: ${PROMETHEUS_URL}
+#      APP_NODE_GRPC: "${CORE_IP}:${CORE_GRPC_PORT}"
+#      APP_NODE_GRPC_TLS: ${APP_NODE_GRPC_TLS}
+#      APP_TM_RPC: "http://${CORE_IP}:${CORE_RPC_PORT}"
+#      API_CALL_RETRY: ${LEADERBOARD_API_CALL_RETRY}
+#      API_CALL_TIMEOUT: ${LEADERBOARD_API_CALL_TIMEOUT}
+#      PROMETHEUS_SYNC_INTERVAL: ${LEADERBOARD_PROMETHEUS_SYNC_INTERVAL}
+#      VALIDATOR_SYNC_INTERVAL: ${LEADERBOARD_VALIDATOR_SYNC_INTERVAL}
+#      TENDERMINT_SYNC_INTERVAL: ${LEADERBOARD_TENDERMINT_SYNC_INTERVAL}
+#      API_ROWS_PER_PAGE: ${LEADERBOARD_API_ROWS_PER_PAGE}
+#      REST_API_ADDRESS: ${LEADERBOARD_REST_API_ADDRESS}
+#      IP_INFO_API_KEY: ${LEADERBOARD_IP_INFO_API_KEY}
+#      DEMO: ${LEADERBOARD_DEMO}
+#      ORIGIN_ALLOWED: ${LEADERBOARD_ORIGIN_ALLOWED}
+#    healthcheck:
+#      test: curl --fail http://leaderboard-backend:${LEADERBOARD_REST_API_PORT}/ || exit 1
+#      interval: 30s
+#      retries: 10 # Will try for 5 minutes
+#    restart: always
+#    security_opt:
+#      - "seccomp:unconfined"
 
   #----------------#
   valuter:
